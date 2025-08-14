@@ -1,105 +1,204 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Cinematic AI Workspace Design System */
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Cinematic Color Palette */
+    --cinema-black: 220 15% 4%;
+    --cinema-black-light: 220 10% 8%;
+    --cinema-silver: 220 9% 67%;
+    --cinema-silver-light: 220 9% 85%;
+    --cinema-electric-blue: 199 89% 48%;
+    --cinema-electric-blue-dark: 199 89% 35%;
+    --cinema-electric-blue-light: 199 89% 65%;
+    --cinema-glow: 199 89% 48%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-cinema-black text-cinema-silver font-sans;
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 32;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-cinema-black-light;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cinema-silver rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-cinema-electric-blue;
+  }
+}
+
+@layer components {
+  /* Hero Components */
+  .hero-input {
+    @apply w-full bg-cinema-black-light/50 border-2 border-cinema-silver/20 rounded-xl px-6 py-4 text-lg text-cinema-silver placeholder:text-cinema-silver/50 backdrop-blur-sm transition-all duration-300;
+    @apply focus:border-cinema-electric-blue focus:ring-4 focus:ring-cinema-electric-blue/20 focus:outline-none;
+    @apply hover:border-cinema-electric-blue/50;
+  }
+
+  .hero-button {
+    @apply bg-electric-gradient text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300;
+    @apply hover:scale-105 hover:shadow-2xl;
+    @apply active:scale-95;
+    box-shadow: 0 8px 32px hsl(var(--cinema-electric-blue) / 0.3);
+  }
+
+  .hero-button:hover {
+    @apply animate-glow-pulse;
+  }
+
+  /* File Upload Area */
+  .file-upload {
+    @apply border-2 border-dashed border-cinema-silver/30 rounded-xl p-8 text-center transition-all duration-300;
+    @apply hover:border-cinema-electric-blue/50 hover:bg-cinema-electric-blue/5;
+    @apply cursor-pointer;
+  }
+
+  .file-upload.drag-over {
+    @apply border-cinema-electric-blue bg-cinema-electric-blue/10;
+    @apply animate-glow-pulse;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply text-cinema-silver hover:text-cinema-electric-blue transition-colors duration-200 font-medium;
+    @apply relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0;
+    @apply after:bg-cinema-electric-blue after:transition-all after:duration-300;
+    @apply hover:after:w-full;
+  }
+
+  /* Sidebar Components */
+  .sidebar-card {
+    @apply bg-cinema-black-light/80 border border-cinema-silver/10 rounded-lg p-4 backdrop-blur-sm;
+    @apply shadow-lg shadow-cinema-black/50;
+  }
+
+  .action-log-item {
+    @apply flex items-center gap-3 p-3 rounded-lg hover:bg-cinema-silver/5 transition-colors duration-200;
+    @apply border-l-2 border-cinema-electric-blue/30;
+  }
+
+  .action-log-item.active {
+    @apply bg-cinema-electric-blue/10 border-l-cinema-electric-blue;
+  }
+
+  /* Browser Simulation */
+  .browser-frame {
+    @apply bg-cinema-black-light border border-cinema-silver/20 rounded-xl overflow-hidden;
+    @apply shadow-2xl shadow-cinema-black/50;
+  }
+
+  .browser-header {
+    @apply bg-cinema-black-light/50 border-b border-cinema-silver/10 p-4 flex items-center gap-2;
+  }
+
+  .browser-dot {
+    @apply w-3 h-3 rounded-full;
+  }
+
+  .browser-dot.red {
+    @apply bg-red-500;
+  }
+
+  .browser-dot.yellow {
+    @apply bg-yellow-500;
+  }
+
+  .browser-dot.green {
+    @apply bg-green-500;
+  }
+
+  /* Active Element Glow */
+  .element-glow {
+    @apply ring-2 ring-cinema-electric-blue;
+    box-shadow: 0 0 20px hsl(var(--cinema-electric-blue) / 0.5);
+  }
+
+  /* Terminal Style */
+  .terminal {
+    @apply bg-cinema-black font-mono text-sm text-cinema-silver;
+  }
+
+  .terminal-prompt {
+    @apply text-cinema-electric-blue;
+  }
+
+  .terminal-cursor::after {
+    content: '▊';
+    @apply text-cinema-electric-blue animate-terminal-cursor;
+  }
+
+  /* Cinematic Shadows */
+  .cinema-shadow {
+    box-shadow: 
+      0 4px 24px -2px hsl(var(--cinema-black) / 0.8),
+      0 0 0 1px hsl(var(--cinema-silver) / 0.1);
+  }
+
+  .cinema-shadow-lg {
+    box-shadow: 
+      0 10px 64px -4px hsl(var(--cinema-black) / 0.9),
+      0 0 0 1px hsl(var(--cinema-silver) / 0.1),
+      0 0 40px hsl(var(--cinema-electric-blue) / 0.1);
   }
 }
